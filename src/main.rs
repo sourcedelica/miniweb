@@ -1,7 +1,7 @@
 use std::io::prelude::*;
-use std::{fs, thread};
 use std::net::{TcpListener, TcpStream};
 use std::time::Duration;
+use std::{fs, thread};
 
 use miniweb::ThreadPool;
 
@@ -10,9 +10,7 @@ fn main() {
     let pool = ThreadPool::new(4);
 
     for stream in listener.incoming().take(2) {
-        pool.execute(|| {
-            handle_connection(stream.unwrap())
-        });
+        pool.execute(|| handle_connection(stream.unwrap()));
     }
 }
 
